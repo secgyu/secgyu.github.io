@@ -1,0 +1,172 @@
+---
+---
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* =========================================================
+   Custom theme: Warm tone + Pretendard font
+   ========================================================= */
+
+$font-warm: 'Pretendard Variable', Pretendard, 'Apple SD Gothic Neo',
+  'Noto Sans KR', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+/* ---- Warm LIGHT palette ---- */
+@mixin warm-light {
+  --main-bg: #faf5ee;
+  --mask-bg: #d8cdbf;
+  --main-border-color: #ece2d3;
+
+  --text-color: #4b4239;
+  --text-muted-color: #8c7e6d;
+  --text-muted-highlight-color: #6b5d4a;
+  --heading-color: #3a2f24;
+  --label-color: #6b5d4a;
+  --blockquote-border-color: #e6dccb;
+  --blockquote-text-color: #8c7e6d;
+  --link-color: #c0743a;
+  --link-underline-color: #e7d6c2;
+  --button-bg: #fffaf3;
+  --btn-border-color: #ece2d3;
+  --btn-backtotop-color: #8c7e6d;
+  --btn-backtotop-border-color: #ece2d3;
+
+  --card-bg: #fffaf3;
+  --card-hover-bg: #f4ebdd;
+  --card-shadow: rgb(120 90 60 / 8%) 0 2px 8px 0,
+    rgb(180 160 140 / 12%) 0 0 0 1px;
+
+  --sidebar-bg: linear-gradient(180deg, #7a5c43 0%, #5d4533 100%);
+  --sidebar-border-color: transparent;
+  --site-title-color: #fdf6ec;
+  --site-subtitle-color: #e4d3bd;
+  --sidebar-muted-color: #d9c8b4;
+  --sidebar-active-color: #ffffff;
+  --sidebar-hover-bg: rgb(255 255 255 / 12%);
+  --sidebar-btn-bg: rgb(255 255 255 / 12%);
+  --sidebar-btn-color: #f0e3d2;
+  --avatar-border-color: #fdf6ec;
+
+  --topbar-bg: rgb(250 245 238 / 80%);
+  --topbar-text-color: #5d4533;
+  --search-border-color: #e6dccb;
+
+  --post-list-text-color: #6b5d4a;
+  --btn-patinator-text-color: #6b5d4a;
+
+  --tb-odd-bg: #fbf6ee;
+  --tb-border-color: #ece2d3;
+  --tag-hover: #f0e3d2;
+  --search-tag-bg: #f4ebdd;
+  --categories-hover-bg: #f0e3d2;
+}
+
+/* ---- Warm DARK palette ---- */
+@mixin warm-dark {
+  --main-bg: #1d1814;
+  --mask-bg: #2a231c;
+  --main-border-color: #2f2820;
+
+  --text-color: #e3d8c8;
+  --text-muted-color: #a3927c;
+  --text-muted-highlight-color: #c9b89f;
+  --heading-color: #f1e7d6;
+  --label-color: #b8a78f;
+  --blockquote-border-color: #3a3128;
+  --blockquote-text-color: #a3927c;
+  --link-color: #e0a061;
+  --link-underline-color: #4a3d2e;
+  --button-bg: #262019;
+  --btn-border-color: #3a3128;
+
+  --card-bg: #241e18;
+  --card-hover-bg: #2d251d;
+  --card-shadow: rgb(0 0 0 / 30%) 0 2px 8px 0, rgb(60 50 40 / 40%) 0 0 0 1px;
+
+  --sidebar-bg: linear-gradient(180deg, #2a221b 0%, #1a1510 100%);
+  --sidebar-border-color: #2f2820;
+  --site-title-color: #f1e7d6;
+  --site-subtitle-color: #b8a78f;
+  --sidebar-muted-color: #9c8b75;
+  --sidebar-active-color: #f6c98a;
+  --sidebar-hover-bg: rgb(224 160 97 / 12%);
+  --sidebar-btn-bg: rgb(255 255 255 / 8%);
+  --sidebar-btn-color: #c9b89f;
+  --avatar-border-color: #3a3128;
+
+  --topbar-bg: rgb(29 24 20 / 80%);
+  --topbar-text-color: #c9b89f;
+
+  --post-list-text-color: #a3927c;
+  --tb-odd-bg: #221c16;
+  --tb-border-color: #2f2820;
+}
+
+/* Apply palettes across toggle + system preference */
+:root[data-mode='light'] {
+  @include warm-light;
+}
+
+:root[data-mode='dark'] {
+  @include warm-dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-mode]) {
+    @include warm-light;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-mode]) {
+    @include warm-dark;
+  }
+}
+
+/* ---- Typography ---- */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.site-title,
+.site-subtitle,
+#sidebar,
+.post-content,
+.content {
+  font-family: $font-warm;
+}
+
+/* ---- Subtle polish ---- */
+#sidebar {
+  box-shadow: 2px 0 14px rgb(90 60 40 / 8%);
+}
+
+a {
+  transition: color 0.2s ease;
+}
+
+#sidebar .nav-link,
+.post-preview,
+.card {
+  transition: background-color 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+#sidebar .nav-link {
+  border-radius: 8px;
+}
